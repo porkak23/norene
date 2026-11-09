@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Norene! 💙✨</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Dancing+Script:wght@700&family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,800;1,400&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-blue: #00b4d8;
+            --deep-sapphire: #03045e;
+            --electric-blue: #0077b6;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: radial-gradient(circle at 50% 30%, #171d63 0%, #080c36 50%, #03041d 100%);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .font-handwriting {
+            font-family: 'Caveat', cursive;
+        }
+
+        .font-luxury {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .font-script {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        /* Ambient floating particles canvas */
+        #stars-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* SVG Cake Wrapper & Animations */
+        .cake-stage-container {
+            cursor: pointer;
+            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(0 15px 35px rgba(0, 180, 216, 0.35));
+        }
+
+        .cake-stage-container:hover {
+            transform: scale(1.04);
+            filter: drop-shadow(0 20px 45px rgba(0, 212, 255, 0.5));
+        }
+
+        /* Floating Balloon Animations */
+        @keyframes balloonFloatLeft {
+            0%, 100% { transform: translateY(0px) rotate(-2deg); }
+            50% { transform: translateY(-12px) rotate(3deg); }
+        }
+        @keyframes balloonFloatRight {
+            0%, 100% { transform: translateY(0px) rotate(2deg); }
+            50% { transform: translateY(-14px) rotate(-3deg); }
+        }
+
+        .floating-balloon-l1 { animation: balloonFloatLeft 4.5s ease-in-out infinite; transform-origin: bottom center; }
+        .floating-balloon-l2 { animation: balloonFloatRight 5.2s ease-in-out infinite; transform-origin: bottom center; }
+        .floating-balloon-r1 { animation: balloonFloatRight 4.8s ease-in-out infinite; transform-origin: bottom center; }
+        .floating-balloon-r2 { animation: balloonFloatLeft 5.5s ease-in-out infinite; transform-origin: bottom center; }
+
+        /* Candle Flames flickering & halo */
+        @keyframes flameFlicker {
+            0% { transform: scale(1) rotate(-1deg); opacity: 0.95; }
+            50% { transform: scale(1.08, 1.15) rotate(2deg); opacity: 1; }
+            100% { transform: scale(0.96, 0.92) rotate(-2deg); opacity: 0.9; }
+        }
+
+        .candle-flame-anim {
+            animation: flameFlicker 0.22s ease-in-out infinite alternate;
+            transform-origin: center bottom;
+        }
+
+        /* Star Wand Sparks */
+        @keyframes starGlow {
+            0%, 100% { filter: drop-shadow(0 0 6px #ffea00); transform: scale(1) rotate(0deg); }
+            50% { filter: drop-shadow(0 0 16px #fff700); transform: scale(1.1) rotate(5deg); }
+        }
+        .star-wand {
+            animation: starGlow 2.5s ease-in-out infinite;
+            transform-origin: center center;
+        }
+
+        /* Cake Explosion effect */
+        .cake-exploded {
+            animation: cakeExplosionAnim 0.85s cubic-bezier(0.2, 0.9, 0.3, 1.2) forwards !important;
+            pointer-events: none;
+        }
+
+        @keyframes cakeExplosionAnim {
+            0% { transform: scale(1); filter: brightness(1); }
+            35% { transform: scale(1.25) rotate(-3deg); filter: brightness(3) drop-shadow(0 0 50px #00f7ff); }
+            65% { transform: scale(1.5) rotate(4deg); opacity: 0.85; filter: brightness(3.5); }
+            100% { transform: scale(3); opacity: 0; filter: blur(25px); visibility: hidden; }
+        }
+
+        /* Glowing button */
+        @keyframes pulse-cyan {
+            0%, 100% { box-shadow: 0 0 15px rgba(0, 180, 216, 0.5), 0 0 30px rgba(72, 202, 228, 0.3); }
+            50% { box-shadow: 0 0 35px rgba(0, 212, 255, 0.9), 0 0 60px rgba(0, 119, 182, 0.7); }
+        }
+        .pulse-electric-blue {
+            animation: pulse-cyan 2s infinite ease-in-out;
+        }
+
+        /* Polaroid styling */
+        .polaroid-card {
+            background: #ffffff;
+            color: #1a1a2e;
+            box-shadow: 0 18px 38px rgba(0,0,0,0.5), 0 5px 12px rgba(0, 119, 182, 0.25);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+        }
+        .polaroid-card:hover {
+            transform: translateY(-10px) scale(1.03) !important;
+            box-shadow: 0 25px 50px rgba(0, 180, 216, 0.5);
+            z-index: 25;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050821; }
+        ::-webkit-scrollbar-thumb { background: #0077b6; border-radius: 4px; }
+    </style>
+</head>
+<body class="relative flex flex-col justify-between items-center selection:bg-cyan-500 selection:text-white">
+
+    <!-- Ambient Stars & Bokeh Canvas -->
+    <canvas id="stars-canvas"></canvas>
+
+    <!-- Audio Player Controls -->
+    <div class="fixed top-4 right-4 z-50 flex items-center gap-3">
+        <button id="musicToggleBtn" onclick="toggleRomanticMusic()" class="bg-blue-950/80 backdrop-blur-md border border-cyan-400/40 text-cyan-300 hover:text-white hover:border-cyan-300 p-3 rounded-full shadow-xl transition duration-300 flex items-center justify-center group" title="Music for Norene">
+            <i id="musicIcon" class="fa-solid fa-music text-lg group-hover:scale-110 transition-transform"></i>
+            <span id="musicText" class="max-w-0 overflow-hidden whitespace-nowrap text-xs font-semibold ml-0 group-hover:max-w-xs group-hover:ml-2 transition-all duration-500">Romantic Melody</span>
+        </button>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- STAGE 1: THE CAKE & SURPRISE TRIGGER           -->
+    <!-- ============================================== -->
+    <main id="cakeStage" class="relative z-10 min-h-screen w-full flex flex-col items-center justify-center px-4 py-8 text-center select-none transition-all duration-700">
+        
+        <div class="mb-4 transform transition duration-300">
+            <span class="inline-flex items-center gap-2 py-1.5 px-6 rounded-full bg-blue-900/40 border border-cyan-400/40 text-cyan-300 text-xs md:text-sm font-semibold tracking-wider uppercase backdrop-blur-md shadow-lg">
+                <i class="fa-solid fa-sparkles text-amber-300"></i> For my favorite storm: Norene <i class="fa-solid fa-sparkles text-amber-300"></i>
+            </span>
+            <p class="text-blue-200/80 text-sm md:text-base mt-3 font-light">Make a wish from the bottom of your heart and tap the cake to light up the surprise</p>
+        </div>
+
+        <!-- The Exact Cake Vector Recreation (from reference image) -->
+        <div id="cakeWrapper" onclick="blowCandleAndExplode(event)" class="cake-stage-container relative w-full max-w-[500px] px-2 flex flex-col items-center justify-center group">
+            
+            <svg viewBox="0 0 500 500" class="w-full h-auto max-h-[460px] drop-shadow-2xl overflow-visible" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <filter id="purpleGlow" x="-30%" y="-30%" width="160%" height="160%">
+                        <feGaussianBlur stdDeviation="8" result="blur" />
+                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                    </filter>
+                    
+                    <linearGradient id="frostingCyan" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#38bdf8"/>
+                        <stop offset="60%" stop-color="#0284c7"/>
+                        <stop offset="100%" stop-color="#0369a1"/>
+                    </linearGradient>
+
+                    <linearGradient id="cakeSponge" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#b45309"/>
+                        <stop offset="50%" stop-color="#78350f"/>
+                        <stop offset="100%" stop-color="#451a03"/>
+                    </linearGradient>
+
+                    <linearGradient id="pinkRibbon" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#f472b6"/>
+                        <stop offset="100%" stop-color="#db2777"/>
+                    </linearGradient>
+
+                    <linearGradient id="candlePink" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#f472b6"/>
+                        <stop offset="100%" stop-color="#ec4899"/>
+                    </linearGradient>
+
+                    <linearGradient id="yellowBalloonGrad" x1="30%" y1="20%" x2="80%" y2="90%">
+                        <stop offset="0%" stop-color="#fef08a"/>
+                        <stop offset="40%" stop-color="#facc15"/>
+                        <stop offset="100%" stop-color="#ca8a04"/>
+                    </linearGradient>
+
+                    <linearGradient id="cyanBalloonGrad" x1="30%" y1="20%" x2="80%" y2="90%">
+                        <stop offset="0%" stop-color="#a5f3fc"/>
+                        <stop offset="40%" stop-color="#38bdf8"/>
+                        <stop offset="100%" stop-color="#0284c7"/>
+                    </linearGradient>
+
+                    <radialGradient id="flameGrad" cx="50%" cy="80%" r="70%">
+                        <stop offset="0%" stop-color="#fffbe6"/>
+                        <stop offset="45%" stop-color="#fde047"/>
+                        <stop offset="80%" stop-color="#ea580c"/>
+                        <stop offset="100%" stop-color="transparent"/>
+                    </radialGradient>
+                </defs>
+
+                <!-- "Happy Birthday" Arched Text on top -->
+                <g id="cakeText">
+                    <path id="textArc" d="M 60,110 Q 250,20 440,110" fill="transparent"/>
+                    <text class="font-script" font-size="52" fill="#ffffff" font-weight="bold" filter="drop-shadow(2px 5px 6px rgba(0,0,0,0.6))">
+                        <textPath href="#textArc" startOffset="50%" text-anchor="middle">
+                            Happy Birthday
+                        </textPath>
+                    </text>
+                </g>
+
+                <!-- Floating Balloons & Strings (Identical to image) -->
+                <!-- Left Yellow Balloon -->
+                <g class="floating-balloon-l1">
+                    <path d="M 150,230 Q 155,290 148,370" stroke="#3b0764" stroke-width="2.5" fill="none"/>
+                    <ellipse cx="145" cy="175" rx="36" ry="46" fill="url(#yellowBalloonGrad)" stroke="#ea580c" stroke-width="2"/>
+                    <path d="M 145,221 L 142,227 L 148,227 Z" fill="#ea580c"/>
+                    <ellipse cx="135" cy="158" rx="8" ry="16" fill="#ffffff" opacity="0.6" transform="rotate(-20 135 158)"/>
+                </g>
+
+                <!-- Left Cyan Balloon -->
+                <g class="floating-balloon-l2">
+                    <path d="M 88,300 Q 98,340 102,400" stroke="#3b0764" stroke-width="2.5" fill="none"/>
+                    <ellipse cx="88" cy="250" rx="35" ry="45" fill="url(#cyanBalloonGrad)" stroke="#0369a1" stroke-width="2"/>
+                    <path d="M 88,295 L 85,301 L 91,301 Z" fill="#0369a1"/>
+                    <ellipse cx="78" cy="235" rx="7" ry="15" fill="#ffffff" opacity="0.55" transform="rotate(-20 78 235)"/>
+                </g>
+
+                <!-- Right Yellow Balloon -->
+                <g class="floating-balloon-r1">
+                    <path d="M 335,230 Q 330,290 338,370" stroke="#3b0764" stroke-width="2.5" fill="none"/>
+                    <ellipse cx="335" cy="175" rx="36" ry="46" fill="url(#yellowBalloonGrad)" stroke="#ea580c" stroke-width="2"/>
+                    <path d="M 335,221 L 332,227 L 338,227 Z" fill="#ea580c"/>
+                    <ellipse cx="325" cy="158" rx="8" ry="16" fill="#ffffff" opacity="0.6" transform="rotate(-20 325 158)"/>
+                </g>
+
+                <!-- Right Cyan Balloon -->
+                <g class="floating-balloon-r2">
+                    <path d="M 395,300 Q 385,340 380,400" stroke="#3b0764" stroke-width="2.5" fill="none"/>
+                    <ellipse cx="395" cy="250" rx="35" ry="45" fill="url(#cyanBalloonGrad)" stroke="#0369a1" stroke-width="2"/>
+                    <path d="M 395,295 L 392,301 L 398,301 Z" fill="#0369a1"/>
+                    <ellipse cx="385" cy="235" rx="7" ry="15" fill="#ffffff" opacity="0.55" transform="rotate(-20 385 235)"/>
+                </g>
+
+                <!-- Left Star Wand -->
+                <g class="star-wand">
+                    <line x1="165" y1="320" x2="145" y2="255" stroke="#71717a" stroke-width="3" stroke-linecap="round"/>
+                    <polygon points="145,235 150,248 163,249 153,258 156,271 145,263 134,271 137,258 127,249 140,248" fill="#facc15" stroke="#ea580c" stroke-width="2"/>
+                </g>
+
+                <!-- Right Star Wand -->
+                <g class="star-wand">
+                    <line x1="320" y1="325" x2="335" y2="260" stroke="#71717a" stroke-width="3" stroke-linecap="round"/>
+                    <polygon points="335,240 340,253 353,254 343,263 346,276 335,268 324,276 327,263 317,254 330,253" fill="#facc15" stroke="#ea580c" stroke-width="2"/>
+                </g>
+
+                <!-- Party Hat on the Right -->
+                <g transform="translate(365, 325) rotate(15)">
+                    <path d="M 25,0 L 55,80 L -5,80 Z" fill="#f97316" stroke="#c2410c" stroke-width="2"/>
+                    <path d="M 19,16 L 31,16 L 35,28 L 15,28 Z" fill="#fde047"/>
+                    <path d="M 12,36 L 38,36 L 43,48 L 7,48 Z" fill="#fde047"/>
+                    <path d="M 5,56 L 45,56 L 50,68 L 0,68 Z" fill="#fde047"/>
+                    <circle cx="25" cy="-2" r="8" fill="#fb923c" stroke="#c2410c" stroke-width="1.5"/>
+                    <line x1="25" y1="-8" x2="25" y2="4" stroke="#fef08a" stroke-width="2"/>
+                    <line x1="19" y1="-5" x2="31" y2="1" stroke="#fef08a" stroke-width="2"/>
+                    <line x1="31" y1="-5" x2="19" y2="1" stroke="#fef08a" stroke-width="2"/>
+                </g>
+
+                <!-- CAKE BASE PEDESTAL PLATE -->
+                <ellipse cx="240" cy="425" rx="115" ry="24" fill="#020617" opacity="0.45"/>
+                <path d="M 130,405 C 130,390 350,390 350,405 C 350,425 130,425 130,405 Z" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+                
+                <!-- Cake base pink frosting beads -->
+                <g id="bottomBeads">
+                    <circle cx="148" cy="385" r="7" fill="#f472b6" stroke="#db2777" stroke-width="1.5"/>
+                    <circle cx="160" cy="392" r="7.5" fill="#f472b6" stroke="#db2777" stroke-width="1.5"/>
+                    <circle cx="174" cy="397" r="8" fill="#f472b6" stroke="#db2777" stroke-width="1.5"/>
+                    <circle cx="190" cy="401" r="8" fill="#f472b6" stroke="#db2777" stroke-width="1.5"/>
+                    <circle cx="208" cy="404" r="8.5" fill="#f472b6" stroke="#db2777" stroke-width="1.5"/>
+                    <circle cx="228" cy="406" r="8.5" fill="#f472b6" stroke="#db2777" stroke-width="1.5"/>
+                    <circle cx="248" cy="406" r="8.5" fill="#f472b6" stroke="#db2777" stroke-width="1.5"/>
+                    <circle cx="268" cy="404" r="8.5" fill="#f472b6" stroke="#db2777" stroke-width="1.5"/>
+                    <circle cx="286" cy="401" r="8.5" fill="#f472b6" stroke="#db2777" stroke-width="1.5"/>
+                    <circle cx="302" cy="397" r="8" fill="#f472b6" stroke="#db2777" stroke-width="1.5"/>
+                    <circle cx="316" cy="392" r="7.5" fill="#f472b6" stroke="#db2777" stroke-width="1.5"/>
+                    <circle cx="328" cy="385" r="7" fill="#f472b6" stroke="#db2777" stroke-width="1.5"/>
+                </g>
+
+                <!-- TIER 3 (BOTTOM CAKE) -->
+                <g id="tier3">
+                    <path d="M 150,345 L 150,385 C 150,405 330,405 330,385 L 330,345 Z" fill="url(#cakeSponge)" stroke="#451a03" stroke-width="2"/>
+                    <path d="M 150,355 C 200,375 280,375 330,355 L 330,370 C 280,390 200,390 150,370 Z" fill="url(#pinkRibbon)"/>
+                    <path d="M 148,310 C 148,290 332,290 332,310 L 332,352 
+                             C 315,340 305,360 290,346 
+                             C 275,362 260,345 245,358 
+                             C 230,342 215,360 200,348 
+                             C 185,362 170,346 158,354 L 148,348 Z" 
+                          fill="url(#frostingCyan)" stroke="#0369a1" stroke-width="2"/>
+                    <rect x="168" y="330" width="8" height="3.5" rx="1.5" fill="#f472b6" transform="rotate(25 168 330)"/>
+                    <rect x="185" y="340" width="8" height="3.5" rx="1.5" fill="#38bdf8" transform="rotate(-15 185 340)"/>
+                    <rect x="220" y="325" width="8" height="3.5" rx="1.5" fill="#f472b6" transform="rotate(10 220 325)"/>
+                    <rect x="238" y="338" width="8" height="3.5" rx="1.5" fill="#fde047" transform="rotate(-30 238 338)"/>
+                    <rect x="275" y="328" width="8" height="3.5" rx="1.5" fill="#f472b6" transform="rotate(20 275 328)"/>
+                    <rect x="300" y="338" width="8" height="3.5" rx="1.5" fill="#38bdf8" transform="rotate(-10 300 338)"/>
+                    <circle cx="155" cy="335" r="2.5" fill="#ffffff"/>
+                    <circle cx="320" cy="336" r="2.5" fill="#ffffff"/>
+                </g>
+
+                <!-- TIER 2 (MIDDLE CAKE) -->
+                <g id="tier2">
+                    <path d="M 172,275 L 172,310 C 172,328 308,328 308,310 L 308,275 Z" fill="url(#cakeSponge)" stroke="#451a03" stroke-width="2"/>
+                    <path d="M 172,285 C 210,302 270,302 308,285 L 308,297 C 270,314 210,314 172,297 Z" fill="url(#pinkRibbon)"/>
+                    <path d="M 170,245 C 170,230 310,230 310,245 L 310,280 
+                             C 295,270 285,286 270,274 
+                             C 255,288 245,272 230,284 
+                             C 215,270 205,286 192,275 
+                             C 182,285 175,276 170,280 Z" 
+                          fill="url(#frostingCyan)" stroke="#0369a1" stroke-width="2"/>
+                    <rect x="188" y="260" width="7" height="3" rx="1.5" fill="#f472b6" transform="rotate(-15 188 260)"/>
+                    <rect x="222" y="255" width="7" height="3" rx="1.5" fill="#fde047" transform="rotate(35 222 255)"/>
+                    <rect x="254" y="258" width="7" height="3" rx="1.5" fill="#f472b6" transform="rotate(-20 254 258)"/>
+                    <rect x="282" y="264" width="7" height="3" rx="1.5" fill="#ffffff" transform="rotate(15 282 264)"/>
+                </g>
+
+                <!-- TIER 1 (TOP CAKE) -->
+                <g id="tier1">
+                    <path d="M 194,222 L 194,245 C 194,260 286,260 286,245 L 286,222 Z" fill="url(#cakeSponge)" stroke="#451a03" stroke-width="2"/>
+                    <path d="M 194,230 C 220,243 260,243 286,230 L 286,238 C 260,251 220,251 194,238 Z" fill="url(#pinkRibbon)"/>
+                    <ellipse cx="240" cy="205" rx="46" ry="15" fill="#38bdf8" stroke="#0369a1" stroke-width="2"/>
+                    <path d="M 194,205 C 194,220 286,220 286,205 L 286,224 
+                             C 275,218 270,230 260,222 
+                             C 250,232 242,220 232,230 
+                             C 222,220 216,230 206,223 
+                             C 198,229 195,223 194,224 Z" 
+                          fill="url(#frostingCyan)" stroke="#0369a1" stroke-width="2"/>
+                    <rect x="206" y="212" width="6" height="2.5" rx="1" fill="#f472b6" transform="rotate(-10 206 212)"/>
+                    <rect x="226" y="218" width="6" height="2.5" rx="1" fill="#38bdf8" transform="rotate(30 226 218)"/>
+                    <rect x="254" y="214" width="6" height="2.5" rx="1" fill="#fde047" transform="rotate(-25 254 214)"/>
+                </g>
+
+                <!-- THREE CANDLES WITH STRIPES & FLAMES -->
+                <g id="candlesGroup">
+                    <ellipse cx="218" cy="155" rx="18" ry="24" fill="#a855f7" opacity="0.35" filter="url(#purpleGlow)"/>
+                    <ellipse cx="240" cy="150" rx="20" ry="26" fill="#a855f7" opacity="0.4" filter="url(#purpleGlow)"/>
+                    <ellipse cx="262" cy="155" rx="18" ry="24" fill="#a855f7" opacity="0.35" filter="url(#purpleGlow)"/>
+
+                    <!-- Candle 1 -->
+                    <g transform="translate(213, 168)">
+                        <rect x="0" y="0" width="9" height="32" rx="2" fill="url(#candlePink)" stroke="#be185d" stroke-width="1.2"/>
+                        <line x1="0" y1="8" x2="9" y2="4" stroke="#ffffff" stroke-width="2.5"/>
+                        <line x1="0" y1="18" x2="9" y2="14" stroke="#ffffff" stroke-width="2.5"/>
+                        <line x1="0" y1="28" x2="9" y2="24" stroke="#ffffff" stroke-width="2.5"/>
+                        <line x1="4.5" y1="0" x2="4.5" y2="-5" stroke="#451a03" stroke-width="1.5"/>
+                        <path id="flame1" class="candle-flame-anim" d="M 4.5,-22 C 1,-16 0,-10 4.5,-4 C 9,-10 8,-16 4.5,-22 Z" fill="url(#flameGrad)"/>
+                    </g>
+
+                    <!-- Candle 2 -->
+                    <g transform="translate(235, 162)">
+                        <rect x="0" y="0" width="10" height="36" rx="2" fill="url(#candlePink)" stroke="#be185d" stroke-width="1.2"/>
+                        <line x1="0" y1="9" x2="10" y2="5" stroke="#ffffff" stroke-width="2.5"/>
+                        <line x1="0" y1="19" x2="10" y2="15" stroke="#ffffff" stroke-width="2.5"/>
+                        <line x1="0" y1="29" x2="10" y2="25" stroke="#ffffff" stroke-width="2.5"/>
+                        <line x1="5" y1="0" x2="5" y2="-6" stroke="#451a03" stroke-width="1.5"/>
+                        <path id="flame2" class="candle-flame-anim" style="animation-delay: -0.1s;" d="M 5,-25 C 1,-18 0,-11 5,-4 C 10,-11 9,-18 5,-25 Z" fill="url(#flameGrad)"/>
+                    </g>
+
+                    <!-- Candle 3 -->
+                    <g transform="translate(257, 168)">
+                        <rect x="0" y="0" width="9" height="32" rx="2" fill="url(#candlePink)" stroke="#be185d" stroke-width="1.2"/>
+                        <line x1="0" y1="8" x2="9" y2="4" stroke="#ffffff" stroke-width="2.5"/>
+                        <line x1="0" y1="18" x2="9" y2="14" stroke="#ffffff" stroke-width="2.5"/>
+                        <line x1="0" y1="28" x2="9" y2="24" stroke="#ffffff" stroke-width="2.5"/>
+                        <line x1="4.5" y1="0" x2="4.5" y2="-5" stroke="#451a03" stroke-width="1.5"/>
+                        <path id="flame3" class="candle-flame-anim" style="animation-delay: -0.18s;" d="M 4.5,-22 C 1,-16 0,-10 4.5,-4 C 9,-10 8,-16 4.5,-22 Z" fill="url(#flameGrad)"/>
+                    </g>
+                </g>
+            </svg>
+        </div>
+
+        <!-- Action Button -->
+        <button onclick="blowCandleAndExplode(event)" 
+                class="mt-6 px-9 py-3.5 rounded-full font-bold text-white bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-blue-500 shadow-xl transform transition active:scale-95 flex items-center gap-3 text-base md:text-lg pulse-electric-blue border border-cyan-300/40">
+            <span>Tap to blow out the candles, Norene</span>
+            <i class="fa-solid fa-wand-magic-sparkles text-amber-300 animate-spin" style="animation-duration: 4s;"></i>
+        </button>
+        <p class="text-xs text-cyan-300/70 mt-3 flex items-center gap-2">
+            <i class="fa-solid fa-volume-high text-cyan-400"></i> Turn up the volume for the full surprise!
+        </p>
+    </main>
+
+    <!-- ============================================== -->
+    <!-- STAGE 2: THE REVEAL & SURPRISE CONTENT         -->
+    <!-- ============================================== -->
+    <div id="contentStage" class="hidden opacity-0 relative z-20 w-full max-w-5xl px-4 py-12 transition-all duration-1000">
+        
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <span class="inline-flex items-center gap-2 px-5 py-1.5 rounded-full bg-blue-900/40 border border-cyan-400/40 text-cyan-300 text-sm font-semibold tracking-wider uppercase backdrop-blur-md mb-4 shadow-md">
+                <i class="fa-solid fa-cake-candles text-amber-300"></i> Celebrating your existence <i class="fa-solid fa-cake-candles text-amber-300"></i>
+            </span>
+            <h1 class="text-5xl md:text-7xl font-luxury font-extrabold text-white tracking-tight drop-shadow-lg leading-tight">
+                Happy Birthday, <br class="hidden sm:inline" />
+                <span class="font-script text-6xl md:text-8xl bg-gradient-to-r from-cyan-300 via-sky-200 to-amber-200 bg-clip-text text-transparent">Norene!</span>
+            </h1>
+            <p class="text-blue-200/90 max-w-2xl mx-auto mt-4 text-base md:text-lg font-light leading-relaxed">
+                Today I celebrate you, your beautiful craziness, your endless tenderness, and this love that completely shakes my whole universe.
+            </p>
+        </header>
+
+        <!-- Romantic Love Letter: "Chaos & Storm of Emotions" -->
+        <section class="mb-16">
+            <div class="relative bg-gradient-to-br from-blue-950/70 via-indigo-950/50 to-slate-900/80 backdrop-blur-xl border border-cyan-400/30 rounded-3xl p-6 md:p-10 shadow-2xl overflow-hidden group">
+                <div class="absolute -right-8 -bottom-8 text-cyan-500/10 text-9xl pointer-events-none group-hover:scale-110 transition duration-700">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-11 h-11 rounded-2xl bg-cyan-500/20 flex items-center justify-center text-cyan-300 border border-cyan-400/40 shadow-inner">
+                        <i class="fa-solid fa-bolt-lightning text-xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-luxury font-bold text-white">My beautiful chaos, my whole universe</h2>
+                        <span class="text-xs text-cyan-300 tracking-wider uppercase font-semibold">To the keeper of every single one of my heartbeats</span>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-blue-100/90 text-base md:text-lg leading-relaxed font-light">
+                    <p>
+                        To my dearest <strong>Norene</strong>: You are that <span class="text-cyan-300 font-semibold underline decoration-cyan-400/60">beautiful chaos</span> that turns my entire world upside down, that sweet <span class="text-amber-200 font-semibold">storm of emotions</span> where no distance could ever dim the flame I hold for you. Every call, every smile of yours on the screen brightens up my darkest days and stirs my calm in the most breathtaking way.
+                    </p>
+                    <p>
+                        Thank you for every heart we join with our hands across the miles, for every late-night conversation keeping each other company in the quiet dark, and for giving me your radiant laughter that heals anything. You are my home, my peace, and my sweetest hurricane.
+                    </p>
+                    <p class="font-handwriting text-3xl md:text-4xl text-cyan-300 pt-3">
+                        Happy Birthday, my love! I love you with all my heart. 💙✨
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Clean Photo Gallery (Uploader-ready with no placeholder images) -->
+        <section class="mb-16">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-luxury font-bold text-white flex items-center gap-3">
+                        <span>Our Memories Together</span>
+                        <i class="fa-solid fa-camera-retro text-cyan-400 text-2xl"></i>
+                    </h2>
+                    <p class="text-blue-200/70 text-sm mt-1">Add your photos to display them in custom polaroid frames</p>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <label for="userPhotoInput" class="cursor-pointer bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold px-5 py-2.5 rounded-2xl shadow-lg hover:shadow-cyan-500/30 transition flex items-center gap-2 text-sm border border-cyan-300/40 transform active:scale-95">
+                        <i class="fa-solid fa-cloud-arrow-up text-amber-300 text-base"></i>
+                        <span>Upload Photos</span>
+                        <input type="file" id="userPhotoInput" accept="image/*" multiple class="hidden" onchange="handleUserPhotoUpload(event)">
+                    </label>
+                </div>
+            </div>
+
+            <!-- Empty State / Dropzone -->
+            <div id="galleryEmptyState" class="hidden w-full border-2 border-dashed border-cyan-400/40 rounded-3xl p-10 text-center bg-blue-950/30 backdrop-blur-sm flex flex-col items-center justify-center transition hover:border-cyan-400 cursor-pointer" onclick="document.getElementById('userPhotoInput').click()">
+                <div class="w-16 h-16 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center text-2xl mb-4 border border-cyan-400/30">
+                    <i class="fa-solid fa-images"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-1">Your gallery is ready!</h3>
+                <p class="text-sm text-blue-200/70 max-w-md mb-4">Click here or use the button above to upload your favorite photos together. Each photo will turn into a personalized polaroid.</p>
+                <span class="text-xs bg-cyan-500/20 text-cyan-300 px-4 py-1.5 rounded-full border border-cyan-400/30 font-semibold">
+                    <i class="fa-solid fa-plus mr-1"></i> Choose Photos
+                </span>
+            </div>
+
+                        <!-- Polaroid Grid -->
+            <div id="polaroidGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center mt-6">
+                <!-- Foto 1 -->
+                <div class="polaroid-card w-72 p-4 rounded-2xl cursor-pointer transform hover:rotate-0 transition duration-300" style="transform: rotate(-2.5deg);" onclick="openPhotoModalDirect('assets/foto1.jpg', 'Holding our hearts together 🫶', 'Norene & Me 💙')">
+                    <div class="relative w-full h-72 overflow-hidden rounded-xl bg-slate-900 group/img flex items-center justify-center">
+                        <img src="assets/foto1.jpg" alt="Our photo" class="w-full h-full object-cover transition duration-500 group-hover/img:scale-105" loading="lazy">
+                        <div class="absolute inset-0 bg-cyan-400/10 opacity-0 group-hover/img:opacity-100 transition flex items-end justify-center pb-3">
+                            <span class="bg-black/60 backdrop-blur-sm text-cyan-200 text-xs px-3 py-1 rounded-full">
+                                <i class="fa-solid fa-magnifying-glass-plus mr-1"></i> View Full Size
+                            </span>
+                        </div>
+                    </div>
+                    <div class="pt-4 pb-2 text-center">
+                        <p class="font-handwriting text-2xl text-slate-800 leading-tight">Holding our hearts together 🫶</p>
+                        <span class="text-[11px] text-blue-900 font-sans tracking-wide uppercase font-semibold">Norene & Me 💙</span>
+                    </div>
+                </div>
+
+                <!-- Foto 2 -->
+                <div class="polaroid-card w-72 p-4 rounded-2xl cursor-pointer transform hover:rotate-0 transition duration-300" style="transform: rotate(2.2deg);" onclick="openPhotoModalDirect('assets/foto2.jpg', 'That smile that lights up my world 😍', 'Norene & Me 💙')">
+                    <div class="relative w-full h-72 overflow-hidden rounded-xl bg-slate-900 group/img flex items-center justify-center">
+                        <img src="assets/foto2.jpg" alt="Our photo" class="w-full h-full object-cover transition duration-500 group-hover/img:scale-105" loading="lazy">
+                        <div class="absolute inset-0 bg-cyan-400/10 opacity-0 group-hover/img:opacity-100 transition flex items-end justify-center pb-3">
+                            <span class="bg-black/60 backdrop-blur-sm text-cyan-200 text-xs px-3 py-1 rounded-full">
+                                <i class="fa-solid fa-magnifying-glass-plus mr-1"></i> View Full Size
+                            </span>
+                        </div>
+                    </div>
+                    <div class="pt-4 pb-2 text-center">
+                        <p class="font-handwriting text-2xl text-slate-800 leading-tight">That smile that lights up my world 😍</p>
+                        <span class="text-[11px] text-blue-900 font-sans tracking-wide uppercase font-semibold">Norene & Me 💙</span>
+                    </div>
+                </div>
+
+                <!-- Foto 3 -->
+                <div class="polaroid-card w-72 p-4 rounded-2xl cursor-pointer transform hover:rotate-0 transition duration-300" style="transform: rotate(-1.8deg);" onclick="openPhotoModalDirect('assets/foto3.jpg', 'Our sweet late-night calls 🌙', 'Norene & Me 💙')">
+                    <div class="relative w-full h-72 overflow-hidden rounded-xl bg-slate-900 group/img flex items-center justify-center">
+                        <img src="assets/foto3.jpg" alt="Our photo" class="w-full h-full object-cover transition duration-500 group-hover/img:scale-105" loading="lazy">
+                        <div class="absolute inset-0 bg-cyan-400/10 opacity-0 group-hover/img:opacity-100 transition flex items-end justify-center pb-3">
+                            <span class="bg-black/60 backdrop-blur-sm text-cyan-200 text-xs px-3 py-1 rounded-full">
+                                <i class="fa-solid fa-magnifying-glass-plus mr-1"></i> View Full Size
+                            </span>
+                        </div>
+                    </div>
+                    <div class="pt-4 pb-2 text-center">
+                        <p class="font-handwriting text-2xl text-slate-800 leading-tight">Our sweet late-night calls 🌙</p>
+                        <span class="text-[11px] text-blue-900 font-sans tracking-wide uppercase font-semibold">Norene & Me 💙</span>
+                    </div>
+                </div>
+
+                <!-- Foto 4 -->
+                <div class="polaroid-card w-72 p-4 rounded-2xl cursor-pointer transform hover:rotate-0 transition duration-300" style="transform: rotate(1.5deg);" onclick="openPhotoModalDirect('assets/foto4.jpg', 'My royal princess 👑✨', 'Norene & Me 💙')">
+                    <div class="relative w-full h-72 overflow-hidden rounded-xl bg-slate-900 group/img flex items-center justify-center">
+                        <img src="assets/foto4.jpg" alt="Our photo" class="w-full h-full object-cover transition duration-500 group-hover/img:scale-105" loading="lazy">
+                        <div class="absolute inset-0 bg-cyan-400/10 opacity-0 group-hover/img:opacity-100 transition flex items-end justify-center pb-3">
+                            <span class="bg-black/60 backdrop-blur-sm text-cyan-200 text-xs px-3 py-1 rounded-full">
+                                <i class="fa-solid fa-magnifying-glass-plus mr-1"></i> View Full Size
+                            </span>
+                        </div>
+                    </div>
+                    <div class="pt-4 pb-2 text-center">
+                        <p class="font-handwriting text-2xl text-slate-800 leading-tight">My royal princess 👑✨</p>
+                        <span class="text-[11px] text-blue-900 font-sans tracking-wide uppercase font-semibold">Norene & Me 💙</span>
+                    </div>
+                </div>
+
+                <!-- Foto 5 -->
+                <div class="polaroid-card w-72 p-4 rounded-2xl cursor-pointer transform hover:rotate-0 transition duration-300" style="transform: rotate(-2deg);" onclick="openPhotoModalDirect('assets/foto5.jpg', 'You & Me against the world 💫', 'Norene & Me 💙')">
+                    <div class="relative w-full h-72 overflow-hidden rounded-xl bg-slate-900 group/img flex items-center justify-center">
+                        <img src="assets/foto5.jpg" alt="Our photo" class="w-full h-full object-cover transition duration-500 group-hover/img:scale-105" loading="lazy">
+                        <div class="absolute inset-0 bg-cyan-400/10 opacity-0 group-hover/img:opacity-100 transition flex items-end justify-center pb-3">
+                            <span class="bg-black/60 backdrop-blur-sm text-cyan-200 text-xs px-3 py-1 rounded-full">
+                                <i class="fa-solid fa-magnifying-glass-plus mr-1"></i> View Full Size
+                            </span>
+                        </div>
+                    </div>
+                    <div class="pt-4 pb-2 text-center">
+                        <p class="font-handwriting text-2xl text-slate-800 leading-tight">You & Me against the world 💫</p>
+                        <span class="text-[11px] text-blue-900 font-sans tracking-wide uppercase font-semibold">Norene & Me 💙</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Photo Zoom Lightbox Modal -->
+        <div id="photoLightbox" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4" onclick="closePhotoModal()">
+            <div class="relative max-w-2xl w-full bg-white rounded-3xl p-4 md:p-6 shadow-2xl flex flex-col items-center" onclick="event.stopPropagation()">
+                <button onclick="closePhotoModal()" class="absolute -top-4 -right-4 w-10 h-10 bg-cyan-500 hover:bg-cyan-400 text-white rounded-full flex items-center justify-center text-lg shadow-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div class="w-full max-h-[70vh] rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center">
+                    <img id="lightboxImg" src="" alt="Full size photo" class="max-w-full max-h-[70vh] object-contain">
+                </div>
+                <div class="pt-4 text-center">
+                    <p id="lightboxCaption" class="font-handwriting text-3xl text-slate-800 font-bold"></p>
+                    <p id="lightboxSubtitle" class="text-xs text-blue-800 tracking-wider uppercase font-semibold mt-1">Special Memory 💙</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Modal Input -->
+        <div id="videoUrlModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4" onclick="closeVideoUrlModal()">
+            <div class="relative max-w-md w-full bg-slate-900 border border-cyan-400/40 rounded-3xl p-6 shadow-2xl text-left" onclick="event.stopPropagation()">
+                <h3 class="text-xl font-luxury font-bold text-white mb-2">Enter Video Link</h3>
+                <p class="text-xs text-blue-200/80 mb-4">Paste a direct MP4 or WebM video link to play it here.</p>
+                <input type="text" id="videoUrlInputField" placeholder="https://example.com/our-video.mp4" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-cyan-400/30 text-white text-sm focus:outline-none focus:border-cyan-400 mb-4">
+                <div class="flex justify-end gap-3">
+                    <button onclick="closeVideoUrlModal()" class="px-4 py-2 rounded-xl bg-white/10 text-white text-xs font-semibold hover:bg-white/20">Cancel</button>
+                    <button onclick="submitVideoUrl()" class="px-5 py-2 rounded-xl bg-cyan-500 text-slate-950 font-bold text-xs hover:bg-cyan-400">Play Video</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Section -->
+        <section class="mb-16">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-luxury font-bold text-white flex items-center gap-3">
+                        <span>A Special Video For Us</span>
+                        <i class="fa-solid fa-film text-cyan-400 text-2xl"></i>
+                    </h2>
+                    <p class="text-blue-200/70 text-sm mt-1">Upload your own video clip or paste a link to watch it together</p>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-2">
+                    <label for="customVideoInput" class="cursor-pointer bg-blue-900/40 hover:bg-blue-800/60 border border-cyan-400/40 text-cyan-200 hover:text-white px-3.5 py-1.5 rounded-xl text-xs md:text-sm font-semibold transition flex items-center gap-2 backdrop-blur-md">
+                        <i class="fa-solid fa-cloud-arrow-up text-amber-300"></i>
+                        <span>Upload Video</span>
+                        <input type="file" id="customVideoInput" accept="video/mp4,video/webm" class="hidden" onchange="handleUserVideoUpload(event)">
+                    </label>
+
+                    <button onclick="openVideoUrlModal()" class="bg-indigo-900/40 hover:bg-indigo-800/60 border border-indigo-400/40 text-indigo-200 hover:text-white px-3.5 py-1.5 rounded-xl text-xs md:text-sm font-semibold transition flex items-center gap-2 backdrop-blur-md">
+                        <i class="fa-solid fa-link"></i>
+                        <span>Video Link</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Video Player Box -->
+            <div class="relative w-full rounded-3xl overflow-hidden border border-cyan-400/40 bg-black/70 shadow-2xl aspect-video max-h-[500px] flex items-center justify-center">
+                <video id="romanticVideoPlayer" class="w-full h-full object-cover" controls playsinline>
+                    <source id="videoSource" src="assets/video.mp4" type="video/mp4">
+                    Your browser does not support video playback.
+                </video>
+
+                <div id="videoHintOverlay" onclick="playVideoDirectly()" class="absolute inset-0 bg-blue-950/40 backdrop-blur-[2px] flex flex-col items-center justify-center cursor-pointer group hover:bg-blue-950/20 transition">
+                    <div class="w-20 h-20 rounded-full bg-cyan-600/90 text-white flex items-center justify-center text-3xl shadow-2xl group-hover:scale-110 transition duration-300 border-2 border-white/60">
+                        <i class="fa-solid fa-play ml-1"></i>
+                    </div>
+                    <span class="mt-4 text-white font-semibold tracking-wider text-sm bg-black/70 px-5 py-2 rounded-full border border-cyan-300/30">
+                        Click here to play our video 🎬💙
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Wishes & Actions -->
+        <footer class="text-center py-8 border-t border-cyan-500/20 flex flex-col items-center">
+            <div class="inline-flex gap-3 text-cyan-400 text-xl mb-4">
+                <i class="fa-solid fa-heart animate-bounce" style="animation-delay: 0s;"></i>
+                <i class="fa-solid fa-bolt text-amber-300 animate-bounce" style="animation-delay: 0.2s;"></i>
+                <i class="fa-solid fa-heart animate-bounce" style="animation-delay: 0.4s;"></i>
+            </div>
+            
+            <h3 class="text-2xl md:text-3xl font-luxury font-bold text-white mb-2">Happy Birthday to my favorite person!</h3>
+            <p class="text-blue-200/80 text-sm max-w-md mb-6">May this new year be filled with wonder, endless smiles, and us. I love you, Norene.</p>
+
+            <div class="flex flex-wrap gap-4 justify-center">
+                <button onclick="triggerConfettiBurst()" class="px-6 py-2.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 font-semibold text-white text-sm shadow-md transition flex items-center gap-2">
+                    <i class="fa-solid fa-sparkles text-amber-300"></i>
+                    <span>Toss More Confetti!</span>
+                </button>
+
+                <button onclick="replaySurprise()" class="px-6 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 text-white text-sm font-semibold transition flex items-center gap-2">
+                    <i class="fa-solid fa-rotate-left"></i>
+                    <span>See the Cake Again</span>
+                </button>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Interactive Script Logic -->
+    <script>
+        // ============================================
+        // 1. Floating Stars & Bokeh Background Effect
+        // ============================================
+        const canvas = document.getElementById('stars-canvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const particles = [];
+        const starColors = ['#ffffff', '#38bdf8', '#00b4d8', '#facc15', '#f472b6'];
+
+        class StarParticle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * width;
+                this.y = height + 20;
+                this.size = Math.random() * 8 + 3;
+                this.speedY = Math.random() * 0.9 + 0.3;
+                this.speedX = (Math.random() - 0.5) * 0.6;
+                this.color = starColors[Math.floor(Math.random() * starColors.length)];
+                this.opacity = Math.random() * 0.5 + 0.3;
+                this.type = Math.random() > 0.4 ? 'star' : 'heart';
+                this.rotation = Math.random() * Math.PI;
+                this.rotationSpeed = (Math.random() - 0.5) * 0.02;
+            }
+
+            update() {
+                this.y -= this.speedY;
+                this.x += this.speedX;
+                this.rotation += this.rotationSpeed;
+                if (this.y < -30) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+
+                if (this.type === 'heart') {
+                    ctx.beginPath();
+                    const s = this.size;
+                    const topCurveHeight = s * 0.3;
+                    ctx.moveTo(0, topCurveHeight);
+                    ctx.bezierCurveTo(0, 0, -s / 2, 0, -s / 2, topCurveHeight);
+                    ctx.bezierCurveTo(-s / 2, (s + topCurveHeight) / 2, 0, s, 0, s);
+                    ctx.bezierCurveTo(0, s, s / 2, (s + topCurveHeight) / 2, s / 2, topCurveHeight);
+                    ctx.bezierCurveTo(s / 2, 0, 0, 0, 0, topCurveHeight);
+                    ctx.closePath();
+                    ctx.fill();
+                } else {
+                    ctx.beginPath();
+                    ctx.arc(0, 0, this.size / 2.5, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < 40; i++) {
+            const p = new StarParticle();
+            p.y = Math.random() * height;
+            particles.push(p);
+        }
+
+        function renderStars() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(renderStars);
+        }
+        renderStars();
+
+        // ============================================
+        // 2. Synthesized Sound & Music (Web Audio API)
+        // ============================================
+        let audioCtx = null;
+        let isMusicPlaying = false;
+        let melodyInterval = null;
+
+        function getAudioContext() {
+            if (!audioCtx) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                audioCtx = new AudioContext();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        function playExplosionSound() {
+            try {
+                const ctx = getAudioContext();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(150, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(25, ctx.currentTime + 0.65);
+
+                gain.gain.setValueAtTime(1, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.7);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.7);
+
+                const notes = [587.33, 659.25, 783.99, 880.00, 1174.66, 1318.51];
+                notes.forEach((freq, idx) => {
+                    const chimeOsc = ctx.createOscillator();
+                    const chimeGain = ctx.createGain();
+                    chimeOsc.type = 'sine';
+                    chimeOsc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.08);
+                    chimeGain.gain.setValueAtTime(0.18, ctx.currentTime + idx * 0.08);
+                    chimeGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.08 + 0.9);
+
+                    chimeOsc.connect(chimeGain);
+                    chimeGain.connect(ctx.destination);
+                    chimeOsc.start(ctx.currentTime + idx * 0.08);
+                    chimeOsc.stop(ctx.currentTime + idx * 0.08 + 0.9);
+                });
+            } catch (e) {
+                console.error("Audio error", e);
+            }
+        }
+
+        function startRomanticMelody() {
+            try {
+                const ctx = getAudioContext();
+                isMusicPlaying = true;
+                const icon = document.getElementById('musicIcon');
+                if (icon) icon.className = 'fa-solid fa-volume-high text-lg text-cyan-300';
+                
+                const romanticNotes = [
+                    293.66, 369.99, 440.00, 587.33, 
+                    440.00, 369.99, 329.63, 392.00, 
+                    493.88, 587.33, 659.25, 440.00
+                ];
+                let noteIndex = 0;
+
+                melodyInterval = setInterval(() => {
+                    if (!isMusicPlaying) return;
+                    const freq = romanticNotes[noteIndex % romanticNotes.length];
+                    noteIndex++;
+
+                    const noteOsc = ctx.createOscillator();
+                    const noteGain = ctx.createGain();
+                    noteOsc.type = 'sine';
+                    noteOsc.frequency.value = freq;
+
+                    noteGain.gain.setValueAtTime(0.001, ctx.currentTime);
+                    noteGain.gain.linearRampToValueAtTime(0.07, ctx.currentTime + 0.08);
+                    noteGain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 1.2);
+
+                    noteOsc.connect(noteGain);
+                    noteGain.connect(ctx.destination);
+
+                    noteOsc.start();
+                    noteOsc.stop(ctx.currentTime + 1.2);
+                }, 550);
+            } catch (e) {
+                console.log("Audio not allowed yet:", e);
+            }
+        }
+
+        function stopRomanticMelody() {
+            isMusicPlaying = false;
+            if (melodyInterval) clearInterval(melodyInterval);
+            const icon = document.getElementById('musicIcon');
+            if (icon) icon.className = 'fa-solid fa-volume-xmark text-lg text-rose-400';
+        }
+
+        function toggleRomanticMusic() {
+            if (isMusicPlaying) {
+                stopRomanticMelody();
+            } else {
+                startRomanticMelody();
+            }
+        }
+
+        // ============================================
+        // 3. Cake Blow & Blue Explosion Sequence
+        // ============================================
+        let isExploded = false;
+
+        function blowCandleAndExplode(e) {
+            if (isExploded) return;
+            isExploded = true;
+
+            playExplosionSound();
+            if (!isMusicPlaying) {
+                startRomanticMelody();
+            }
+
+            const cakeWrapper = document.getElementById('cakeWrapper');
+            const flames = ['flame1', 'flame2', 'flame3'];
+
+            flames.forEach(id => {
+                const f = document.getElementById(id);
+                if (f) {
+                    f.style.transition = 'all 0.2s ease-out';
+                    f.style.transform = 'scale(0)';
+                    f.style.opacity = '0';
+                }
+            });
+
+            if (cakeWrapper) cakeWrapper.classList.add('cake-exploded');
+
+            // Confetti fireworks
+            if (typeof confetti === 'function') {
+                const count = 380;
+                const defaults = { origin: { y: 0.65 } };
+                function fire(particleRatio, opts) {
+                    confetti(Object.assign({}, defaults, opts, {
+                        particleCount: Math.floor(count * particleRatio)
+                    }));
+                }
+                fire(0.25, { spread: 40, startVelocity: 55, colors: ['#00b4d8', '#38bdf8', '#ffd166'] });
+                fire(0.2, { spread: 80, colors: ['#ffffff', '#0077b6', '#f472b6'] });
+                fire(0.35, { spread: 120, decay: 0.91, scalar: 1.15, colors: ['#03045e', '#0096c7', '#48cae4', '#ec4899'] });
+                fire(0.1, { spread: 140, startVelocity: 35, decay: 0.93, scalar: 1.4, shapes: ['circle'], colors: ['#ffd700', '#facc15', '#00f7ff'] });
+                fire(0.1, { spread: 160, startVelocity: 50, colors: ['#ffffff', '#38bdf8', '#ff70a6'] });
+            }
+
+            setTimeout(() => {
+                const cakeStage = document.getElementById('cakeStage');
+                const contentStage = document.getElementById('contentStage');
+
+                if (cakeStage) cakeStage.classList.add('hidden');
+                if (contentStage) {
+                    contentStage.classList.remove('hidden');
+                    setTimeout(() => {
+                        contentStage.classList.remove('opacity-0');
+                        contentStage.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
+                }
+                runSideCannons();
+            }, 750);
+        }
+
+        function runSideCannons() {
+            if (typeof confetti !== 'function') return;
+            const end = Date.now() + 3.5 * 1000;
+            const colors = ['#00b4d8', '#ffd166', '#ffffff', '#38bdf8', '#f472b6'];
+
+            (function frame() {
+                confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 }, colors: colors });
+                confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 }, colors: colors });
+                if (Date.now() < end) requestAnimationFrame(frame);
+            }());
+        }
+
+        function triggerConfettiBurst() {
+            getAudioContext();
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 130,
+                    spread: 85,
+                    origin: { y: 0.6 },
+                    colors: ['#00b4d8', '#38bdf8', '#f472b6', '#ffd166']
+                });
+            }
+        }
+
+        function replaySurprise() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(() => {
+                isExploded = false;
+                const cakeStage = document.getElementById('cakeStage');
+                const contentStage = document.getElementById('contentStage');
+                const cakeWrapper = document.getElementById('cakeWrapper');
+                const flames = ['flame1', 'flame2', 'flame3'];
+
+                if (contentStage) contentStage.classList.add('opacity-0');
+                setTimeout(() => {
+                    if (contentStage) contentStage.classList.add('hidden');
+                    if (cakeStage) cakeStage.classList.remove('hidden');
+                    if (cakeWrapper) cakeWrapper.classList.remove('cake-exploded');
+                    flames.forEach(id => {
+                        const f = document.getElementById(id);
+                        if (f) {
+                            f.style.opacity = '1';
+                            f.style.transform = 'scale(1)';
+                        }
+                    });
+                }, 400);
+            }, 400);
+        }
+
+        // ============================================
+        // 4. Photos & Lightbox Helpers
+        // ============================================
+        function openPhotoModalDirect(src, title, subtitle) {
+            const modal = document.getElementById('photoLightbox');
+            const modalImg = document.getElementById('lightboxImg');
+            const caption = document.getElementById('lightboxCaption');
+            const sub = document.getElementById('lightboxSubtitle');
+
+            if (modal && modalImg) {
+                modalImg.src = src;
+                if (caption) caption.textContent = title;
+                if (sub) sub.textContent = subtitle;
+                modal.classList.remove('hidden');
+            }
+        }
+
+        function closePhotoModal() {
+            const modal = document.getElementById('photoLightbox');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function handleUserPhotoUpload(event) {
+            const files = event.target.files;
+            if (!files || files.length === 0) return;
+
+            const grid = document.getElementById('polaroidGrid');
+            const emptyState = document.getElementById('galleryEmptyState');
+            if (emptyState) emptyState.classList.add('hidden');
+
+            const captions = [
+                'Holding our hearts together 🫶',
+                'Endless late-night talks 🌙',
+                'That smile that lights up my world 😍',
+                'My royal princess 👑',
+                'Our perfect other half 💙',
+                'My favorite beautiful chaos ✨',
+                'You and me against the world 💫'
+            ];
+
+            Array.from(files).forEach((file) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const randomRotation = (Math.random() * 6 - 3).toFixed(1);
+                    const captionText = captions[Math.floor(Math.random() * captions.length)];
+
+                    const card = document.createElement('div');
+                    card.className = 'polaroid-card w-72 p-4 rounded-2xl cursor-pointer transform hover:rotate-0 transition duration-300';
+                    card.style.transform = `rotate(${randomRotation}deg)`;
+                    card.onclick = () => openPhotoModalDirect(e.target.result, captionText, 'Norene & Me 💙');
+
+                    card.innerHTML = `
+                        <div class="relative w-full h-72 overflow-hidden rounded-xl bg-slate-900 group/img flex items-center justify-center">
+                            <img src="${e.target.result}" alt="Our photo" class="w-full h-full object-cover transition duration-500 group-hover/img:scale-105">
+                            <div class="absolute inset-0 bg-cyan-400/10 opacity-0 group-hover/img:opacity-100 transition flex items-end justify-center pb-3">
+                                <span class="bg-black/60 backdrop-blur-sm text-cyan-200 text-xs px-3 py-1 rounded-full">
+                                    <i class="fa-solid fa-magnifying-glass-plus mr-1"></i> View Full Size
+                                </span>
+                            </div>
+                        </div>
+                        <div class="pt-4 pb-2 text-center">
+                            <p class="font-handwriting text-2xl text-slate-800 leading-tight">${captionText}</p>
+                            <span class="text-[11px] text-blue-900 font-sans tracking-wide uppercase font-semibold">Norene & Me 💙</span>
+                        </div>
+                    `;
+                    grid.prepend(card);
+                };
+                reader.readAsDataURL(file);
+            });
+
+            triggerConfettiBurst();
+        }
+
+        // ============================================
+        // 5. Video Player Controls & Custom Modal
+        // ============================================
+        function playVideoDirectly() {
+            const video = document.getElementById('romanticVideoPlayer');
+            const overlay = document.getElementById('videoHintOverlay');
+            if (video) {
+                if (overlay) overlay.classList.add('hidden');
+                video.play().catch(err => console.log('Autoplay prevented:', err));
+            }
+        }
+
+        function handleUserVideoUpload(event) {
+            const file = event.target.files && event.target.files[0];
+            if (!file) return;
+
+            const video = document.getElementById('romanticVideoPlayer');
+            const videoSrc = document.getElementById('videoSource');
+            const overlay = document.getElementById('videoHintOverlay');
+
+            const fileUrl = URL.createObjectURL(file);
+            if (videoSrc) videoSrc.src = fileUrl;
+            if (video) {
+                video.src = fileUrl;
+                video.load();
+                if (overlay) overlay.classList.add('hidden');
+                video.play().catch(e => console.log('Autoplay blocked:', e));
+            }
+            triggerConfettiBurst();
+        }
+
+        function openVideoUrlModal() {
+            const modal = document.getElementById('videoUrlModal');
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeVideoUrlModal() {
+            const modal = document.getElementById('videoUrlModal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function submitVideoUrl() {
+            const input = document.getElementById('videoUrlInputField');
+            if (input && input.value.trim() !== '') {
+                const video = document.getElementById('romanticVideoPlayer');
+                const overlay = document.getElementById('videoHintOverlay');
+                if (video) {
+                    video.src = input.value.trim();
+                    video.load();
+                    if (overlay) overlay.classList.add('hidden');
+                    video.play().catch(e => console.log('Autoplay blocked:', e));
+                }
+                triggerConfettiBurst();
+                closeVideoUrlModal();
+            }
+        }
+
+        // Pause background music when video starts playing
+        document.addEventListener('DOMContentLoaded', () => {
+            const vid = document.getElementById('romanticVideoPlayer');
+            if (vid) {
+                vid.addEventListener('play', () => {
+                    if (isMusicPlaying) stopRomanticMelody();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
